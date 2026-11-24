@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Combat animator for Roblox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="importmap">{"imports":{"three":"/vendor/three/build/three.module.js","three/addons/":"/vendor/three/examples/jsm/"}}</script>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<aside>
+  <header>
+    <h1>Combat animator</h1>
+    <div id="link"><i id="dot"></i><span id="linktext">Connecting…</span></div>
+  </header>
+  <div id="log" aria-live="polite"><p class="empty">Describe a move, like “heavy overhead sword slash with a big windup”, and pick a style. Emotes and dances work too. Pick any result to replay it.</p></div>
+  <form id="form">
+    <div class="chips" id="chips"></div>
+    <label class="opt" for="style">Style
+      <select id="style"><option value="auto">Auto (varies)</option></select>
+    </label>
+    <div class="hint" id="stylehint"></div>
+    <textarea id="prompt" maxlength="500" placeholder="What should the character do?  (Ctrl+Enter to generate)" required></textarea>
+    <div class="row">
+      <button class="primary" id="gen" type="submit">Generate</button>
+      <button id="rev" type="button" disabled>Revise current</button>
+    </div>
+    <div class="row">
+      <button class="apply" id="apply" type="button" disabled>Apply to Studio</button>
+      <button id="rbxmx" type="button" disabled>.rbxmx</button>
+      <button id="luau" type="button" disabled>Copy Luau</button>
+    </div>
+    <div class="err" id="err" role="alert"></div>
+  </form>
+</aside>
+<main>
+  <div id="stage">
+    <div class="legend">Orange = right side, blue = left side. Drag to orbit, scroll to zoom.</div>
+    <div id="warnings" hidden></div>
+  </div>
+  <div id="bar">
+    <button id="play" type="button" disabled>Play</button>
+    <div id="timeline">
+      <input id="scrub" type="range" min="0" max="1000" value="0" disabled aria-label="Timeline">
+      <div id="ticks" aria-hidden="true"></div>
+    </div>
+    <select id="speed" aria-label="Speed"><option value="1">1x</option><option value="0.5">0.5x</option><option value="0.25">0.25x</option></select>
+    <label><input id="loop" type="checkbox" checked> Loop</label>
+    <span id="time">0.00 / 0.00s</span>
+  </div>
+</main>
+<div id="toast" role="status"></div>
+<script type="module" src="/app.js"></script>
+</body>
+</html>
